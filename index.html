@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEURONEXUS — Understand Your Learning. Improve Your Potential.</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              indigo: '#6366f1',
+              teal: '#14b8a6',
+              dark: '#080c14',
+              surface: '#0e1524',
+              card: '#141c30'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom Design System Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+</head>
+<body class="bg-[#0a0c10] text-slate-100 flex flex-col min-h-screen">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 bg-[#0c0e14]/95 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="window.neuronexusApp.navigate('landing')">
+        <img src="assets/logo.svg" alt="Neuronexus Logo" class="w-8 h-8">
+        <div>
+          <div class="text-base font-extrabold tracking-wider bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
+            NEURONEXUS
+          </div>
+          <div class="text-[9px] font-mono text-slate-400 -mt-1 tracking-tight">INFINITE LOOPERS • EDTECH</div>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation Bar -->
+      <nav class="hidden xl:flex items-center gap-1 text-xs">
+        <a href="#landing" class="nav-link active" data-target="landing" onclick="window.neuronexusApp.navigate('landing')">Home</a>
+        <a href="#dashboard" class="nav-link" data-target="dashboard" onclick="window.neuronexusApp.navigate('dashboard')">Dashboard</a>
+        <a href="#neurolearn" class="nav-link" data-target="neurolearn" onclick="window.neuronexusApp.navigate('neurolearn')">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          NeuroLearn Loop
+        </a>
+        <a href="#courses" class="nav-link" data-target="courses" onclick="window.neuronexusApp.navigate('courses')">Courses</a>
+        <a href="#community" class="nav-link" data-target="community" onclick="window.neuronexusApp.navigate('community')">Campus-Q&A</a>
+        <a href="#ai-classroom" class="nav-link" data-target="ai-classroom" onclick="window.neuronexusApp.navigate('ai-classroom')">AI Classroom</a>
+        <a href="#arena" class="nav-link" data-target="arena" onclick="window.neuronexusApp.navigate('arena')">
+          <span class="text-amber-400">⚡</span>
+          Gamified Arena
+        </a>
+        <a href="#neuro-analysis" class="nav-link" data-target="neuro-analysis" onclick="window.neuronexusApp.navigate('neuro-analysis')">
+          <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+          Mental Status & Waves
+        </a>
+        <a href="#faculty" class="nav-link" id="nav-faculty-link" data-target="faculty" onclick="window.neuronexusApp.navigate('faculty')">Faculty</a>
+        <a href="#parents" class="nav-link" id="nav-parents-link" data-target="parents" onclick="window.neuronexusApp.navigate('parents')">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+          Parent Portal
+        </a>
+        <a href="#mentors" class="nav-link" data-target="mentors" onclick="window.neuronexusApp.navigate('mentors')">Mentors</a>
+        <a href="#privacy" class="nav-link" data-target="privacy" onclick="window.neuronexusApp.navigate('privacy')">Privacy</a>
+      </nav>
+
+      <!-- Right Header Actions: Role Switcher & Demo Mode -->
+      <div class="flex items-center gap-3">
+        <!-- Role Switcher -->
+        <div class="flex items-center gap-2 bg-slate-900/80 p-1.5 rounded-xl border border-slate-800 text-xs">
+          <span class="text-slate-400 text-[11px] hidden md:inline">Role:</span>
+          <select id="header-role-select" onchange="window.neuronexusApp.switchUserRole(this.value)"
+                  class="bg-slate-950 text-slate-200 text-xs px-2 py-1 rounded-lg border border-slate-700 focus:outline-none focus:border-cyan-400 cursor-pointer">
+            <option value="usr_student_01">Student (Aarav)</option>
+            <option value="usr_student_02">Student (Priya)</option>
+            <option value="usr_student_03">Student (Rohan)</option>
+            <option value="usr_faculty_01">Faculty (Dr. Ramanathan)</option>
+            <option value="usr_mentor_01">Mentor (Ananya)</option>
+            <option value="usr_parent_01">Parent (Mrs. Sharma)</option>
+          </select>
+          <span id="header-role-badge" class="badge-demo">STUDENT</span>
+        </div>
+
+        <!-- Demo Badge -->
+        <div class="hidden sm:flex items-center gap-1.5">
+          <span class="badge-demo" title="Deterministic educational data and simulated EEG">DEMO MODE</span>
+        </div>
+
+        <!-- Quick Tour / Reset Button -->
+        <button onclick="window.neuronexusApp.startDemoWalkthrough()"
+                class="hidden sm:inline-flex btn-primary text-xs px-3 py-1.5" title="Start 2-min interactive walkthrough">
+          Demo Tour
+        </button>
+      </div>
+    </div>
+
+    <!-- Secondary Mobile Navigation Bar -->
+    <div class="xl:hidden flex items-center justify-start gap-1 px-4 py-2 bg-slate-950/80 border-t border-slate-800/80 overflow-x-auto text-xs whitespace-nowrap">
+      <a href="#landing" class="nav-link px-2 py-1" data-target="landing" onclick="window.neuronexusApp.navigate('landing')">Home</a>
+      <a href="#dashboard" class="nav-link px-2 py-1" data-target="dashboard" onclick="window.neuronexusApp.navigate('dashboard')">Dashboard</a>
+      <a href="#neurolearn" class="nav-link px-2 py-1 text-cyan-300 font-bold" data-target="neurolearn" onclick="window.neuronexusApp.navigate('neurolearn')">NeuroLearn</a>
+      <a href="#courses" class="nav-link px-2 py-1" data-target="courses" onclick="window.neuronexusApp.navigate('courses')">Courses</a>
+      <a href="#community" class="nav-link px-2 py-1" data-target="community" onclick="window.neuronexusApp.navigate('community')">Q&A</a>
+      <a href="#ai-classroom" class="nav-link px-2 py-1" data-target="ai-classroom" onclick="window.neuronexusApp.navigate('ai-classroom')">AI Classroom</a>
+      <a href="#arena" class="nav-link px-2 py-1 text-amber-300 font-bold" data-target="arena" onclick="window.neuronexusApp.navigate('arena')">Arena</a>
+      <a href="#neuro-analysis" class="nav-link px-2 py-1" data-target="neuro-analysis" onclick="window.neuronexusApp.navigate('neuro-analysis')">Neuro</a>
+      <a href="#faculty" class="nav-link px-2 py-1" data-target="faculty" onclick="window.neuronexusApp.navigate('faculty')">Faculty</a>
+      <a href="#parents" class="nav-link px-2 py-1 text-amber-300 font-bold" data-target="parents" onclick="window.neuronexusApp.navigate('parents')">Parents</a>
+      <a href="#mentors" class="nav-link px-2 py-1" data-target="mentors" onclick="window.neuronexusApp.navigate('mentors')">Mentors</a>
+      <a href="#privacy" class="nav-link px-2 py-1" data-target="privacy" onclick="window.neuronexusApp.navigate('privacy')">Privacy</a>
+    </div>
+  </header>
+
+  <!-- Main View Container (Dynamically rendered by app.js) -->
+  <main id="main-content" class="flex-1">
+  </main>
+
+  <!-- Application Core Scripts -->
+  <script src="js/seed-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/neurolearn.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/oscilloscope.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/ai-classroom.js"></script>
+  <script src="js/community-qa.js"></script>
+  <script src="js/faculty.js"></script>
+  <script src="js/eeg-simulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

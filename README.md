@@ -1,44 +1,34 @@
-# Neurovoice12
-Neurovoice is a brainprint based communication for mute and paralyzed people and it uses AI to predict the real time intent of the Paralyzed people
- NeuroVoice – Brainprint Based Communication System
+# NEURONEXUS — BioAmp EXG Pill Hardware Bridge
 
 ## Overview
-NeuroVoice is a brain-signal-based assistive communication system designed for individuals with severe speech and motor impairments. It captures EEG signals, processes them, and translates identifiable brain patterns into meaningful communication outputs.
+The **BioAmp EXG Pill** is an open-source, analog front-end biopotential amplifier designed by Upside Down Labs. It records high-resolution EEG signals without requiring expensive proprietary acquisition equipment.
 
-The system is intended for individuals who are cognitively aware but unable to speak due to conditions such as ALS, stroke, spinal cord injury, or locked-in syndrome.
----
+## Intended Hardware Pipeline
+```
+[Electrodes: Fp1, Fp2, Ear Reference]
+         ↓
+[BioAmp EXG Pill (Analog Amplification)]
+         ↓ Analog Output (A0)
+[Microcontroller: Arduino Nano / ESP32 / Maker Nano]
+         ↓ USB Serial (115200 baud, 250 Hz)
+[Local Python Bridge: eeg_bridge/bridge.py]
+         ↓
+[Preprocessing: 0.5-45 Hz Bandpass, 50 Hz Notch Filter]
+         ↓
+[NEURONEXUS Web Platform]
+```
 
-## Problem Statement
-People with severe motor and speech impairments are unable to communicate effectively despite having intact cognitive abilities. This results in loss of independence, emotional distress, and social isolation.
----
+## Recommended Electrode Placement
+- **Electrode 1 (IN+):** Forehead Left (Fp1)
+- **Electrode 2 (IN-):** Forehead Right (Fp2)
+- **Electrode 3 (REF):** Left or Right Ear Lobe (A1/A2 Ground Reference)
 
-## Objectives
-- Capture EEG signals using BioAmp v1.5
-- Process and clean raw brain signals
-- Extract meaningful features
-- Classify brain patterns
-- Convert predictions into text output
----
+## Hardware Communication Protocol
+- **Baud Rate:** `115200`
+- **Sampling Rate:** `250 Hz` (4 ms sample period)
+- **ADC Resolution:** 10-bit (Arduino) or 12-bit (ESP32)
+- **Format:** Single float ASCII voltage string per newline
 
-## Target Users
-- ALS patients
-- Stroke survivors
-- Paralyzed individuals
-- Rehabilitation centers
-
----
-## Tech Stack
-- Python
-- Machine Learning
-- EEG Signal Processing
-- Flask (for prototype interface)
-
----
-## Current Status
-Prototype stage – Signal acquisition and processing pipeline under development.
----
-## Future Scope
-- Real-time brain-to-text system
-- Deep learning model integration
-- Mobile application
-- Cloud deployment
+## Ethical & Scientific Notice
+- **Non-Diagnostic:** Signals captured via single-channel frontal leads provide noisy contextual indicators and **do not** validate clinical attention or neurological diagnoses.
+- **Signal Rejection Policy:** If valid sample coverage falls below 70%, NEURONEXUS **withholds the focus estimate** rather than generating fabricated data.
